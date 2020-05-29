@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 app.get('/edit', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/editor/edit.html'));
 });
-app.get('/edit/script.js', (req, res) => {
+app.get('/edit/editor.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/editor/editor.js'));
 });
 app.get('/edit/editor.css', (req, res) => {
