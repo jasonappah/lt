@@ -1,0 +1,31 @@
+{
+    "name": "bibles-lt",
+    "version": "0.0.1",
+    "description": "Live lower thirds powered by socket.io",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jasonappah/bibles-lt.git"
+    },
+    "keywords": [
+        "bibles",
+        "lower",
+        "thirds",
+        "live",
+        "stream"
+    ],
+    "author": "Jason Antwi-Appah",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jasonappah/bibles-lt/issues"
+    },
+    "homepage": "https://github.com/jasonappah/bibles-lt#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "showdown": "^1.9.1",
+        "socket.io": "^2.3.0"
+    }
+}
