@@ -24,6 +24,7 @@
     },
     "homepage": "https://github.com/jasonappah/bibles-lt#readme",
     "dependencies": {
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "showdown": "^1.9.1",
         "socket.io": "^2.3.0"

@@ -1,4 +1,5 @@
 const express = require('express');
+const env = require('dotenv').config()
 const http = require('http');
 const showdown = require('showdown');
 const path = require('path');
