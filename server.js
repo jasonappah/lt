@@ -7,6 +7,9 @@ const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 const converter = new showdown.Converter();
+var mode = process.env.MODE || "FULLSCREEN"
+const modes = { "FULLSCREEN": "show.html", "LT": "showlt.html" }
+
 // Configuration
 
 server.listen(process.env.PORT || 8000, () => {
@@ -14,20 +17,29 @@ server.listen(process.env.PORT || 8000, () => {
 });
 
 // Routes
-
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/show.html'));
+    if (mode in modes) {
+        res.sendFile(path.join(__dirname, 'views/', modes[mode]));
+    } else {
+        res.sendFile(path.join(__dirname, 'views/show.html'));
+    }
 });
 
 app.get('/edit', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/edit.html'));
+    res.sendFile(path.join(__dirname, 'views/editor/edit.html'));
+});
+app.get('/edit/script.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/editor/editor.js'));
+});
+app.get('/edit/editor.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/editor/editor.css'));
 });
 
 // Socket Events
 
 io.on('connection', (socket) => {
-    console.log(`[ server.js ] ${socket.id} connected`);
-
+    console.log(`[ server.js ] ${socket.id} connected in mode ${mode}`);
+    socket.emit('slideModes', modes)
     socket.on('disconnect', () => {
         console.log(`[ server.js ] ${socket.id} disconnected`);
     });
