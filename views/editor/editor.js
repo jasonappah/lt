@@ -6,9 +6,7 @@ const slides = [
 ];
 
 function sendUpdateSlideRequest(markdown) {
-    const {
-        protocol
-    } = window.location;
+    const { protocol } = window.location;
     const url = `${protocol}/api/updateSlide?markdown=${encodeURIComponent(markdown)}`;
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
