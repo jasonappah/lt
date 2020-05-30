@@ -1,0 +1,8 @@
+# All vars are required for the program to function. Make a copy of this file to edit and rename it to .env
+
+# Mode can be FULLSCREEN or LT
+BLTMODE=LT
+
+# Please, please, please change these, especially if you aren't hosting this on your local network!
+BLTUSER=ADMIN
+BLTPASS=ADMIN      

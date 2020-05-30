@@ -7,8 +7,11 @@ const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 const converter = new showdown.Converter();
-var mode = process.env.MODE || "FULLSCREEN"
+var md5 = require("blueimp-md5")
+var mode = process.env.BLTMODE || "FULLSCREEN"
 const modes = { "FULLSCREEN": "show.html", "LT": "showlt.html" }
+const adminUser = md5(process.env.BLTUSER)
+const adminPass = md5(process.env.BLTPASS)
 
 // Configuration
 
@@ -26,13 +29,32 @@ app.get('/', (req, res) => {
 });
 
 app.get('/edit', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/editor/edit.html'));
+
+    console.log(`[ server.js ] GET request to '/edit' => ${JSON.stringify(req.query)}`);
+
+    const { user } = req.query;
+    const { pass } = req.query;
+
+    if (adminUser == user && adminPass == pass) {
+        console.log(`User ${adminUser} logged in`)
+        console.log(adminUser)
+        console.log(adminPass)
+        res.sendFile(path.join(__dirname, 'views/editor/edit.html'));
+    } else {
+        console.log(`Attempted logged in`)
+        res.sendFile(path.join(__dirname, 'views/editor/login.html'));
+    }
+
 });
+
 app.get('/edit/editor.js', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/editor/editor.js'));
 });
 app.get('/edit/editor.css', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/editor/editor.css'));
+});
+app.get('/edit/login.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/editor/login.js'));
 });
 
 // Socket Events
