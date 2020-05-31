@@ -3,16 +3,22 @@
 <html>
 
 <head>
-    <title>BiblesLT | Login</title>
+    <title>BiblesLT | Login/Signup</title>
     <link href="edit/editor.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1 class="centre">Login</h1>
-    <input type="text" id="user" placeholder="Enter username"></input>
-    <input type="password" id="pass" placeholder="Enter password"></input>
-    <div id="submit-button" onclick="onSubmit()">Submit</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
+
+    <h1 class="centre">Login</h1>
+    <h5 id="msg" class="centre"></h5>
+    <input class="hidden" type="text" id="name-field" placeholder="Enter name"></input>
+    <input type="text" id="user" placeholder="Enter email"></input>
+    <input type="password" id="pass" placeholder="Enter password"></input>
+    <div class="centre">
+        <div class="inline" id="submit-button" onclick="onLogin()">Login</div>
+        <div class="inline" id="submit-button" onclick="onSubmit()">Sign Up</div>
+    </div>
     <script src="edit/login.js"></script>
 </body>
 

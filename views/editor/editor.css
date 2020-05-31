@@ -62,3 +62,11 @@ input {
     padding: 25px;
     font-size: 1.25em;
 }
+
+.inline {
+    display: inline;
+}
+
+.hidden {
+    display: none;
+}

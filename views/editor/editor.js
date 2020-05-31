@@ -5,6 +5,13 @@ const slides = [
     '#Clever Libraries 🛠\nPowered by Express.js, Socket.io, Showdown and some sweet Vanilla JS',
 ];
 
+// Borrowed from http://atodorov.org/blog/2013/01/28/remove-query-string-with-javascript-and-html5/
+var uri = window.location.toString();
+if (uri.indexOf("?") > 0) {
+    var clean_uri = uri.substring(0, uri.indexOf("?"));
+    window.history.replaceState({}, document.title, clean_uri);
+}
+
 function sendUpdateSlideRequest(markdown) {
     const { protocol } = window.location;
     const url = `${protocol}/api/updateSlide?markdown=${encodeURIComponent(markdown)}`;

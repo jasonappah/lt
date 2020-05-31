@@ -6,3 +6,6 @@ BLTMODE=LT
 # Please, please, please change these, especially if you aren't hosting this on your local network!
 BLTUSER=ADMIN
 BLTPASS=ADMIN      
+
+# MongoDB Connection String
+MONGOCONNSTR=mongodb+srv://<username>:<password>@<server>/<databasename>?retryWrites=true&w=majority

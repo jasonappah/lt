@@ -8,12 +8,24 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const converter = new showdown.Converter();
 var md5 = require("blueimp-md5")
+const mongoose = require('mongoose');
+const Signup = require(path.join(__dirname, 'models/user.model.js'))
+const UserModel = mongoose.model("users");
 var mode = process.env.BLTMODE || "FULLSCREEN"
 const modes = { "FULLSCREEN": "show.html", "LT": "showlt.html" }
 const adminUser = md5(process.env.BLTUSER)
 const adminPass = md5(process.env.BLTPASS)
 
 // Configuration
+
+mongoose.connect(process.env.MONGOCONNSTR, { useNewUrlParser: true, useUnifiedTopology: true }, (error) => {
+    if (error) {
+        console.log("Error connecting to database");
+        console.log(error)
+    } else {
+        console.log("Successfully connected to db!");
+    }
+});
 
 server.listen(process.env.PORT || 8000, () => {
     console.log(`[ server.js ] Listening on port ${server.address().port}`);
@@ -84,4 +96,41 @@ app.get('/api/updateSlide', (req, res) => {
     } else {
         res.status(400).send('Invalid parameters.\n');
     }
+});
+
+app.get('/api/newUser', (req, res) => {
+    // in progress
+    console.log(`[ server.js ] GET request to 'api/newUser' => ${JSON.stringify(req.query)}`);
+
+    const { user } = req.query;
+    const { pass } = req.query;
+    const { name } = req.query;
+    var msg = "";
+
+    let data = {
+        email: user,
+        password: pass,
+        name: name
+    }
+    var instance = new UserModel(data)
+    instance.save((err, doc) => {
+        console.log("------------------")
+        console.log(JSON.stringify(err));
+        console.log("----------------------")
+        console.log(JSON.stringify(req.body));
+        console.log("----------------------")
+
+        if (err) {
+            msg = encodeURIComponent(err)
+            res.sendFile(path.join(__dirname, `views/editor/login.html?msg=${msg}`));
+        } else {
+            msg = encodeURIComponent("You have been registered successfully! You may login.")
+	    res.redirect(`/edit?msg=${msg}`)
+        }
+    })
+
+    // make the user
+    // redirect back to login page with status
+
+
 });
