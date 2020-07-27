@@ -1,2 +1,2 @@
-# bibles-lt
+# lt
 Live lower thirds powered by socket.io
