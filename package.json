@@ -30,7 +30,7 @@
         "mongoose": "^5.9.16",
         "mongoose-unique-validator": "^2.0.3",
         "showdown": "^1.9.1",
-        "socket.io": "^2.4.0"
+        "socket.io": "^2.5.0"
     },
     "devDependencies": {
         "@architect/sandbox": "^1.12.0"
